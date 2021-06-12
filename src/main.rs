@@ -1,11 +1,15 @@
 mod libs;
 
-use crate::libs::x::XBackend;
+use crate::libs::x::*;
 
-//#[path="libs/X/XCB/XCBBackend.rs"] mod XCBBackend;
-fn main() 
+fn main() -> Result<(), String>
 {
-    let mut xcb_backend: crate::libs::x::xcb::XCBBackend = crate::libs::x::xcb::XCBBackend::new();
-    let init_result = xcb_backend.init();
-    println!("Hello, world!");
+    let mut xbackend = crate::libs::x::get_xbackend();
+    let init_result = xbackend.init();
+    
+    match init_result.err()
+    {
+        Some(error_message) => Err(error_message),
+        None => Ok(())
+    }
 }

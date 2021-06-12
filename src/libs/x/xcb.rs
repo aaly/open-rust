@@ -16,9 +16,14 @@ impl XCBBackend
 impl XBackend for XCBBackend
 {
 
-    fn init(&mut self) -> (bool, String)
+    fn init(&mut self) -> Result<bool, String>
     {
-        (true, String::from("Success!"))
+	Ok(true)
+    }
+
+    fn connect(&mut self) -> Result<bool, String>
+    {
+        Ok(true)
     }
 }
 
