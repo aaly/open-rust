@@ -15,22 +15,32 @@ pub enum XEventType
 	MotionNotify,
 }
 
-
 pub trait XEvent
 {
 	fn get_event_type(&mut self) -> XEventType;
 }
 
+#[derive(Debug, Copy, Clone)]
 pub struct ConfigureNotifyXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct ClientMessageXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct ReparentNotifyXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct CreateNotifyXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct MapRequestXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct DestroyNotifyXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct KeyReleaseXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct KeyPressXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct ButtonPressXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct ButtonReleaseXEvent {}
+#[derive(Debug, Copy, Clone)]
 pub struct MotionNotifyXEvent {}
 
 
@@ -122,14 +132,12 @@ impl XEvent for MotionNotifyXEvent
 	}
 }
 
-
-
 pub trait XBackend
 {
     fn init(&mut self) -> Result<bool, String>;
     fn connect(&mut self, display: Option<&str>) -> Result<bool, String>;
     fn get_window_id(&mut self, screen_num: usize) -> u32;
-    fn run(&mut self) -> Result<bool, String>;
+    fn run(&mut self) -> Result<(), String>;
     
     fn get_receiver(&mut self) -> &std::sync::mpsc::Receiver<Box<dyn XEvent>>;
 }
